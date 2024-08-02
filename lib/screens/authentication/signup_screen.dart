@@ -34,12 +34,12 @@ class _SignupScreenState extends State<SignupScreen> {
         passwordController.text,
       );
       if (user != null) {
-        if (!mounted) return; // Check if the widget is still mounted
-        Navigator.pushReplacementNamed(context, '/home'); // Navigate to the home screen or appropriate screen
+        if (!mounted) return; 
+        Navigator.pushReplacementNamed(context, '/home'); 
       }
     } catch (e) {
-      // Handle signup error
-      if (!mounted) return; // Check if the widget is still mounted
+    
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Signup failed: $e')),
       );
@@ -73,8 +73,8 @@ class _SignupScreenState extends State<SignupScreen> {
           SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 80), // Add space at the top
-                const LogoWithCompanyName(), // Use the reusable widget here
+                const SizedBox(height: 80),
+                const LogoWithCompanyName(), 
                 const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20), // Internal padding
@@ -85,7 +85,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       BoxShadow(
                         color: Colors.black87,
                         blurRadius: 10,
-                        offset: Offset(0, -5), // Adjusted offset to create a shadow effect
+                        offset: Offset(0, -5), 
                       ),
                     ],
                   ),

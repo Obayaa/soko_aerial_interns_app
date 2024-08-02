@@ -56,8 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
           SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 145), // Add space at the top
-                const LogoWithCompanyName(), // Use the reusable widget here
+                const SizedBox(height: 145), 
+                const LogoWithCompanyName(), 
                 const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Colors.black87,
                         blurRadius: 10,
                         offset: Offset(
-                            0, -5), // Adjusted offset to create a shadow effect
+                            0, -5), 
                       ),
                     ],
                   ),

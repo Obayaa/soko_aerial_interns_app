@@ -86,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(),
-                const LogoWithCompanyName(), // Use the reusable widget here
+                const LogoWithCompanyName(), 
                 const SizedBox(height: 16),
                 // Welcome text
                 const Text(
@@ -105,7 +105,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   opacity: _animation,
                   child: LinearProgressIndicator(
                     value:
-                        null, // Progress indicator shows indeterminate progress
+                        null,
                     backgroundColor: Colors.white.withOpacity(0.3),
                     color: Colors.white,
                   ),
