@@ -87,8 +87,8 @@ class OnboardingScreen extends StatelessWidget {
         fontFamily: 'ProductSans',
         fontSize: 18,
       ),
-      imagePadding: EdgeInsets.only(top: 70,), // Adjust padding
-      contentMargin: EdgeInsets.all(5), // Adjust margin for overall spacing
+      imagePadding: EdgeInsets.only(top: 70,), 
+      contentMargin: EdgeInsets.all(5), 
       pageMargin: EdgeInsets.only(bottom: 10),
       bodyPadding: EdgeInsets.symmetric(horizontal: 16),
       safeArea: 30,
