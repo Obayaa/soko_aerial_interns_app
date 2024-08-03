@@ -1,5 +1,3 @@
-// lib/widgets/home_widgets/continue_learning_list.dart
-
 import 'package:flutter/material.dart';
 import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 import '../../data/models/course.dart';
@@ -9,14 +7,13 @@ class ContinueLearningList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // This is a placeholder. In a real app, you'd fetch this data from an API or local database
     final List<Course> courses = [
-      Course(title: 'Flutter Basics', progress: 0.7, imageUrl: 'assets/flutter_basics.jpg'),
-      Course(title: 'Advanced Python', progress: 0.4, imageUrl: 'assets/advanced_python.jpg'),
-      // Add more courses as needed
+      Course(title: 'Flutter Basics', progress: 0.7, imageUrl: 'assets/images/mobile.jpg'),
+      Course(title: 'Arduino', progress: 0.4, imageUrl: 'assets/images/arduino.jpg'),
     ];
 
     return ListView.builder(
+      padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: courses.length,
@@ -35,8 +32,20 @@ class ContinueLearningCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
-      margin: const EdgeInsets.only(bottom: 16),
+      height: 100, 
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0), // External padding
+      padding: const EdgeInsets.all(12.0), // Internal padding
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
       child: Row(
         children: [
           ClipRRect(

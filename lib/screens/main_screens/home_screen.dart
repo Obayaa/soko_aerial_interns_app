@@ -1,5 +1,3 @@
-// lib/screens/home/home_screen.dart
-
 import 'package:flutter/material.dart';
 import '../../widgets/home_widgets/category_section.dart';
 import '../../widgets/home_widgets/continue_learning_section.dart';
@@ -17,80 +15,78 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppTheme.backgroundColor,
       bottomNavigationBar: const CustomBottomNavigationBar(currentIndex: 0),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200.0,
-            floating: false,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                decoration: const BoxDecoration(
-                  color: AppTheme.primaryColor,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16.0, 50.0, 16.0, 20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        children: [
+          Container(
+            height: 200.0, // Adjust the height as needed
+            decoration: const BoxDecoration(
+              color: AppTheme.primaryColor,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 50.0, 16.0, 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                Strings.greeting,
-                                style: AppTheme.headerTextStyle,
-                              ),
-                              Text(
-                                Strings.learningPrompt,
-                                style: AppTheme.subHeaderTextStyle,
-                              ),
-                            ],
+                          Text(
+                            Strings.greeting,
+                            style: AppTheme.headerTextStyle,
                           ),
-                          Icon(
-                            Icons.notifications,
-                            color: Colors.white,
+                          Text(
+                            Strings.learningPrompt,
+                            style: AppTheme.subHeaderTextStyle,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16.0),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.search, color: Colors.grey),
-                            hintText: Strings.searchHint,
-                            border: InputBorder.none,
-                          ),
-                        ),
+                      Icon(
+                        Icons.notifications,
+                        color: Colors.white,
                       ),
                     ],
                   ),
-                ),
+                  const SizedBox(height: 16.0),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: const TextField(
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.search, color: Colors.grey),
+                        hintText: Strings.searchHint,
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              const SizedBox(height: 16.0),
-              const CategorySection(),
-              const SizedBox(height: 16.0),
-              const CourseSection(),
-              const SizedBox(height: 16.0),
-              const MentorSection(),
-              const SizedBox(height: 16.0),
-              const ContinueLearningSection(),
-            ]),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              physics: const ClampingScrollPhysics(), // Removes bouncy effect
+              children: const [
+                SizedBox(height: 16.0),
+                CategorySection(),
+                SizedBox(height: 16.0),
+                CourseSection(),
+                SizedBox(height: 16.0),
+                MentorSection(),
+                SizedBox(height: 16.0),
+                ContinueLearningSection(),
+              ],
+            ),
           ),
         ],
       ),

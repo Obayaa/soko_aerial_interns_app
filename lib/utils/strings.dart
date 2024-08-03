@@ -12,5 +12,5 @@ class Strings {
   static const String leaderboard = 'Leaderboard';
   static const String profile = 'Profile';
 
-  // Add more strings as needed
+  // More strings to be added needed
 }

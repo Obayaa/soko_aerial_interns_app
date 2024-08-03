@@ -12,24 +12,27 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        TextButton(
-          onPressed: onSeeAll,
-          child: const Text(
-            'See all',
-            style: TextStyle(color: Color.fromARGB(255, 2, 88, 236)),
+          TextButton(
+            onPressed: onSeeAll,
+            child: const Text(
+              'See all',
+              style: TextStyle(color: Color.fromARGB(255, 2, 88, 236)),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

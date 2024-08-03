@@ -17,8 +17,11 @@ class CourseSection extends StatelessWidget {
           title: Strings.popularCourses,
           onSeeAll: () => Navigator.pushNamed(context, '/courses'),
         ),
-        const SizedBox(height: 8.0),
-        const CourseList(),
+        const SizedBox(height: 4.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: CourseList(),
+        ),
       ],
     );
   }

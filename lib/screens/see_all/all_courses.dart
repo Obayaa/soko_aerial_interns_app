@@ -8,66 +8,54 @@ class AllCoursesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Popular Courses'),
-        backgroundColor: const Color.fromARGB(255, 2, 88, 236),
+        backgroundColor: const Color(0xFF0258EC),
+        leading: const Icon(Icons.arrow_back),
+        actions: const [Icon(Icons.search)],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         children: [
           CourseItem(
             title: 'Web Development',
-            instructor: 'John Doe',
-            imageUrl: 'assets/images/web.jpg',
-            onTap: () {
-              Navigator.pushNamed(context, '/web_dev');
-            },
+            instructor: 'Mark Joe',
+            imageUrl: 'assets/images/web_dev.png',
+            onTap: () => Navigator.pushNamed(context, '/web_dev'),
           ),
           CourseItem(
             title: 'UI/UX Design',
-            instructor: 'Emma W.',
-            imageUrl: 'assets/images/ui.jpg',
-            onTap: () {
-              Navigator.pushNamed(context, '/ui_ux');
-            },
+            instructor: 'Sampson A.G.',
+            imageUrl: 'assets/images/ui_ux.png',
+            onTap: () => Navigator.pushNamed(context, '/ui_ux'),
           ),
           CourseItem(
             title: 'Mobile App Development',
-            instructor: 'Bright Osei',
-            imageUrl: 'assets/images/mobile.jpg',
-            onTap: () {
-              Navigator.pushNamed(context, '/flutter');
-            },
+            instructor: 'Bright Opoku',
+            imageUrl: 'assets/images/mobile_app.png',
+            onTap: () => Navigator.pushNamed(context, '/mobile_app'),
           ),
           CourseItem(
             title: 'Desktop App Development',
-            instructor: 'David O.',
-            imageUrl: 'assets/images/desktop.jpg',
-            onTap: () {
-              Navigator.pushNamed(context, '/desktop');
-            },
+            instructor: 'Bright Opoku',
+            imageUrl: 'assets/images/desktop_app.png',
+            onTap: () => Navigator.pushNamed(context, '/desktop_app'),
           ),
           CourseItem(
             title: 'Arduino',
-            instructor: 'Bright Osei',
-            imageUrl: 'assets/images/arduino.jpg',
-            onTap: () {
-              Navigator.pushNamed(context, '/arduino');
-            },
+            instructor: 'Bright Opoku',
+            imageUrl: 'assets/images/arduino.png',
+            onTap: () => Navigator.pushNamed(context, '/arduino'),
           ),
           CourseItem(
             title: 'Mapping',
-            instructor: 'David O.',
-            imageUrl: 'assets/images/mapping.jpg',
-            onTap: () {
-              Navigator.pushNamed(context, '/mapping');
-            },
+            instructor: 'Bright Opoku',
+            imageUrl: 'assets/images/mapping.png',
+            onTap: () => Navigator.pushNamed(context, '/mapping'),
           ),
           CourseItem(
             title: 'Drone Engineering',
-            instructor: 'Bright Osei',
-            imageUrl: 'assets/images/drone_engineering.jpg',
-            onTap: () {
-              Navigator.pushNamed(context, '/drone_engineering');
-            },
+            instructor: 'Bright Opoku',
+            imageUrl: 'assets/images/drone.png',
+            onTap: () => Navigator.pushNamed(context, '/drone_engineering'),
           ),
         ],
       ),
@@ -91,18 +79,67 @@ class CourseItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ListTile(
-        onTap: onTap,
-        leading: Image.asset(
-          imageUrl,
-          width: 50,
-          height: 50,
-          fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
-        title: Text(title),
-        subtitle: Text('Instructor: $instructor'),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                bottomLeft: Radius.circular(12.0),
+              ),
+              child: Image.asset(
+                imageUrl,
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: 16.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4.0),
+                  Row(
+                    children: [
+                      const Icon(Icons.person, size: 16.0, color: Colors.grey),
+                      const SizedBox(width: 4.0),
+                      Text(
+                        instructor,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

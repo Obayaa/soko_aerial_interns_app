@@ -2,53 +2,76 @@ import 'package:flutter/material.dart';
 
 class AllMentorsScreen extends StatelessWidget {
   final List<Mentor> mentors = [
-    Mentor('Hubert Amponsah', 'Python Application Developer', 'assets/images/mentor.jpeg'),
-    Mentor('Mark Amoakohene', 'Web Application Developer', 'assets/images/mentor.jpeg'),
-    Mentor('Sampson Adu-Gyamfi', 'UI/UX Designer', 'assets/images/mentor.jpeg'),
-    Mentor('Bernard Amoateng', 'Arduino Programming Dev...', 'assets/images/mentor.jpeg'),
-    Mentor('Bright Opoku', 'Mobile App Developer', 'assets/images/mentor.jpeg'),
-    Mentor('Edmond Ayitey', 'Python App Developer', 'assets/images/mentor.jpeg'),
-    Mentor('Martin Mawusi', 'Autonomous Flight D...', 'assets/images/mentor.jpeg'),
-    Mentor('Godfrey Hudson', 'Drone Engineer', 'assets/images/mentor.jpeg'),
-    Mentor('Confidence Gawu', 'Site Mapping Instructor', 'assets/images/mentor.jpeg'),
-    Mentor('Eric Amenyo', 'Drone Basic Trainer', 'assets/images/mentor.jpeg'),
-    Mentor('Edem Mawuena', 'Drone Engineer', 'assets/images/mentor.jpeg'),
-    Mentor('Benedicta Ayetey', 'Drone pilot/Map instr...', 'assets/images/mentor.jpeg'),
-    Mentor('George Ntori', 'Python Application Dev...', 'assets/images/mentor.jpeg'),
-    Mentor('Jedidiah K. Tetteh', 'Drone Expert', 'assets/images/mentor.jpeg'),
-    Mentor('Ernest Keteku', 'Geographic Site map...', 'assets/images/mentor.jpeg'),
-    Mentor('wences whyne', '3D Designer', 'assets/images/mentor.jpeg'),
-    Mentor('Ernest Quan', 'Design Engineer', 'assets/images/mentor.jpeg'),
+    Mentor('Hubert Amponsah', 'Python Application Developer', 'assets/images/mentors.jpeg'),
+    Mentor('Mark Amoakohene', 'Web Application Developer', 'assets/images/mentors.jpeg'),
+    Mentor('Sampson Adu-Gyamfi', 'UI/UX Designer', 'assets/images/mentors.jpeg'),
+    Mentor('Bernard Amoateng', 'Arduino Programming Dev...', 'assets/images/mentors.jpeg'),
+    Mentor('Bright Opoku', 'Mobile App Developer', 'assets/images/mentors.jpeg'),
+    Mentor('Edmond Ayitey', 'Python App Developer', 'assets/images/mentors.jpeg'),
+    Mentor('Martin Mawusi', 'Autonomous Flight D...', 'assets/images/mentors.jpeg'),
+    Mentor('Godfrey Hudson', 'Drone Engineer', 'assets/images/mentors.jpeg'),
+    Mentor('Confidence Gawu', 'Site Mapping Instructor', 'assets/images/mentors.jpeg'),
+    Mentor('Eric Amenyo', 'Drone Basic Trainer', 'assets/images/mentors.jpeg'),
+    Mentor('Edem Mawuena', 'Drone Engineer', 'assets/images/mentors.jpeg'),
+    Mentor('Benedicta Ayetey', 'Drone pilot/Map instr...', 'assets/images/mentors.jpeg'),
+    Mentor('George Ntori', 'Python Application Dev...', 'assets/images/mentors.jpeg'),
+    Mentor('Jedidiah K. Tetteh', 'Drone Expert', 'assets/images/mentors.jpeg'),
+    Mentor('Ernest Keteku', 'Geographic Site map...', 'assets/images/mentors.jpeg'),
+    Mentor('wences whyne', '3D Designer', 'assets/images/mentors.jpeg'),
+    Mentor('Ernest Quan', 'Design Engineer', 'assets/images/mentors.jpeg'),
   ];
 
-   AllMentorsScreen({super.key});
+  AllMentorsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF2196F3),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2196F3),
-        elevation: 0,
-        title: const Text('All Mentors', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () => Navigator.pop(context),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              // Implement search functionality
-            },
+      body: Container(
+        color: const Color(0xFF2196F3),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    const Text(
+                      'All Mentors',
+                      style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.search, color: Colors.white),
+                      onPressed: () {
+                        // Implement search functionality
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                  ),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.only(top: 20),
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: mentors.length,
+                    itemBuilder: (context, index) {
+                      return MentorListItem(mentor: mentors[index]);
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: ListView.builder(
-        itemCount: mentors.length,
-        itemBuilder: (context, index) {
-          return MentorListItem(mentor: mentors[index]);
-        },
+        ),
       ),
     );
   }
@@ -65,11 +88,11 @@ class Mentor {
 class MentorListItem extends StatelessWidget {
   final Mentor mentor;
 
-  const MentorListItem({super.key, required this.mentor});
+  const MentorListItem({Key? key, required this.mentor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
@@ -84,11 +107,11 @@ class MentorListItem extends StatelessWidget {
               children: [
                 Text(
                   mentor.name,
-                  style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   mentor.role,
-                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                  style: const TextStyle(color: Colors.grey, fontSize: 14),
                 ),
               ],
             ),

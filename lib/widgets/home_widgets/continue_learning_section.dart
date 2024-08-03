@@ -17,7 +17,7 @@ class ContinueLearningSection extends StatelessWidget {
           title: Strings.continueLearning,
           onSeeAll: () => Navigator.pushNamed(context, '/continue_learning'),
         ),
-        const SizedBox(height: 8.0),
+        // const SizedBox(height: 8.0),
         const ContinueLearningList(),
       ],
     );
