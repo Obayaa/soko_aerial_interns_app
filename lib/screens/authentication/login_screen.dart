@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:soko_aerial_interns_app/data/repositories/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 import '../../widgets/reusable_widgets/custom_text_field.dart';
 import '../../widgets/reusable_widgets/logo_with_company_name.dart';
 
@@ -71,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 50.0, horizontal: 20), // Internal padding
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: AppTheme.backgroundColor,
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(40)),
                     boxShadow: [
@@ -118,8 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text(
                             'Forgot Password?',
                             style: TextStyle(
-                              color: Color.fromARGB(
-                                  255, 2, 88, 236), // Color for the text
+                              color: AppTheme.primaryColor, // Color for the text
                               fontSize: 16,
                             ),
                           ),

@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 
 class AllCoursesScreen extends StatelessWidget {
   const AllCoursesScreen({super.key});
 
+  get sectionTitleStyle => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.backgroundColor,
       appBar: AppBar(
-        title: const Text('Popular Courses'),
-        backgroundColor: const Color(0xFF0258EC),
-        leading: const Icon(Icons.arrow_back),
-        actions: const [Icon(Icons.search)],
+        foregroundColor: Colors.white,
+        title: const Text(
+          'Popular Courses',
+          style: AppTheme.sectionTitleStyle,
+        ),
+        centerTitle: true,
+        backgroundColor: AppTheme.primaryColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
@@ -18,43 +35,43 @@ class AllCoursesScreen extends StatelessWidget {
           CourseItem(
             title: 'Web Development',
             instructor: 'Mark Joe',
-            imageUrl: 'assets/images/web_dev.png',
+            imageUrl: 'assets/images/web.jpg',
             onTap: () => Navigator.pushNamed(context, '/web_dev'),
           ),
           CourseItem(
             title: 'UI/UX Design',
             instructor: 'Sampson A.G.',
-            imageUrl: 'assets/images/ui_ux.png',
+            imageUrl: 'assets/images/ui.jpg',
             onTap: () => Navigator.pushNamed(context, '/ui_ux'),
           ),
           CourseItem(
             title: 'Mobile App Development',
             instructor: 'Bright Opoku',
-            imageUrl: 'assets/images/mobile_app.png',
-            onTap: () => Navigator.pushNamed(context, '/mobile_app'),
+            imageUrl: 'assets/images/mobile.jpg',
+            onTap: () => Navigator.pushNamed(context, '/mobile'),
           ),
           CourseItem(
             title: 'Desktop App Development',
             instructor: 'Bright Opoku',
-            imageUrl: 'assets/images/desktop_app.png',
-            onTap: () => Navigator.pushNamed(context, '/desktop_app'),
+            imageUrl: 'assets/images/desktop.jpg',
+            onTap: () => Navigator.pushNamed(context, '/desktop'),
           ),
           CourseItem(
             title: 'Arduino',
             instructor: 'Bright Opoku',
-            imageUrl: 'assets/images/arduino.png',
+            imageUrl: 'assets/images/arduino.jpg',
             onTap: () => Navigator.pushNamed(context, '/arduino'),
           ),
           CourseItem(
             title: 'Mapping',
             instructor: 'Bright Opoku',
-            imageUrl: 'assets/images/mapping.png',
+            imageUrl: 'assets/images/mapping.jpg',
             onTap: () => Navigator.pushNamed(context, '/mapping'),
           ),
           CourseItem(
             title: 'Drone Engineering',
             instructor: 'Bright Opoku',
-            imageUrl: 'assets/images/drone.png',
+            imageUrl: 'assets/images/drone_engineering.jpg',
             onTap: () => Navigator.pushNamed(context, '/drone_engineering'),
           ),
         ],
@@ -84,13 +101,13 @@ class CourseItem extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 16.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppTheme.backgroundColor,
           borderRadius: BorderRadius.circular(12.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
+              color: Colors.grey.withOpacity(0.2),
               spreadRadius: 1,
-              blurRadius: 4,
+              blurRadius: 2,
               offset: const Offset(0, 2),
             ),
           ],
@@ -116,22 +133,20 @@ class CourseItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTheme.TitleStyle,
                   ),
                   const SizedBox(height: 4.0),
                   Row(
                     children: [
-                      const Icon(Icons.person, size: 16.0, color: Colors.grey),
+                      const Icon(Icons.person,
+                          size: 25.0, color: AppTheme.secondaryColor),
                       const SizedBox(width: 4.0),
                       Text(
                         instructor,
                         style: const TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.grey,
-                        ),
+                            fontSize: 14.0,
+                            color: AppTheme.secondaryColor,
+                            fontFamily: 'Product Sans'),
                       ),
                     ],
                   ),

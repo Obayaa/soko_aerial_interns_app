@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:soko_aerial_interns_app/data/repositories/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 import '../../widgets/reusable_widgets/custom_text_field.dart';
 import '../../widgets/reusable_widgets/logo_with_company_name.dart';
 
@@ -187,7 +188,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                               TextSpan(
                                 text: 'Login Here',
-                                style: const TextStyle(color: Color.fromARGB(255, 2, 88, 236)),
+                                style: const TextStyle(color: AppTheme.primaryColor),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.pushReplacementNamed(context, '/login');
