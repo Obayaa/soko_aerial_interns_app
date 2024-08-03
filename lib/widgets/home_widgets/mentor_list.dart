@@ -30,8 +30,8 @@ class MentorList extends StatelessWidget {
     ];
 
     return Container(
-      height: 90, // Adjusted height
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      height: 100, 
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: mentors.map((mentor) => Expanded(
@@ -63,7 +63,7 @@ class MentorCard extends StatelessWidget {
             child: Text(
               mentor.name,
               style: const TextStyle(
-                fontSize: 12,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,

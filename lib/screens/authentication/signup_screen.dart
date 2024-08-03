@@ -24,7 +24,8 @@ class _SignupScreenState extends State<SignupScreen> {
   Future<void> _signup(BuildContext context) async {
     if (!_isAgreed) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('You must agree with the terms and conditions.')),
+        const SnackBar(
+            content: Text('You must agree with the terms and conditions.')),
       );
       return;
     }
@@ -35,11 +36,10 @@ class _SignupScreenState extends State<SignupScreen> {
         passwordController.text,
       );
       if (user != null) {
-        if (!mounted) return; 
-        Navigator.pushReplacementNamed(context, '/home'); 
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, '/home');
       }
     } catch (e) {
-    
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Signup failed: $e')),
@@ -74,19 +74,21 @@ class _SignupScreenState extends State<SignupScreen> {
           SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 80),
-                const LogoWithCompanyName(), 
+                const SizedBox(height: 115),
+                const LogoWithCompanyName(),
                 const SizedBox(height: 20),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20), // Internal padding
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 35.0, horizontal: 20), // Internal padding
                   decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(40)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black87,
                         blurRadius: 10,
-                        offset: Offset(0, -5), 
+                        offset: Offset(0, -5),
                       ),
                     ],
                   ),
@@ -103,25 +105,25 @@ class _SignupScreenState extends State<SignupScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
                       CustomTextField(
                         hintText: 'Username',
                         keyboardType: TextInputType.text,
                         controller: usernameController,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 10),
                       CustomTextField(
                         hintText: 'Email',
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 10),
                       CustomTextField(
                         hintText: 'Password',
                         obscureText: true,
                         controller: passwordController,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 5),
                       Row(
                         children: [
                           Checkbox(
@@ -135,7 +137,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           const Text('I agree to the terms and conditions'),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 5),
                       ElevatedButton(
                         onPressed: () => _signup(context),
                         style: ElevatedButton.styleFrom(
@@ -146,20 +148,25 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         child: const Text('Sign Up'),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(child: Container(color: Colors.black, height: 1)),
+                            Expanded(
+                                child:
+                                    Container(color: Colors.black, height: 1)),
                             const SizedBox(width: 8),
                             const Text(
                               'Or sign up with',
                               style: TextStyle(color: Colors.black),
                             ),
                             const SizedBox(width: 8),
-                            Expanded(child: Container(color: Colors.black, height: 1)),
+                            Expanded(
+                                child:
+                                    Container(color: Colors.black, height: 1)),
                           ],
                         ),
                       ),
@@ -188,10 +195,12 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                               TextSpan(
                                 text: 'Login Here',
-                                style: const TextStyle(color: AppTheme.primaryColor),
+                                style: const TextStyle(
+                                    color: AppTheme.primaryColor),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushReplacementNamed(context, '/login');
+                                    Navigator.pushReplacementNamed(
+                                        context, '/login');
                                   },
                               ),
                             ],

@@ -133,7 +133,7 @@ class CourseItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTheme.TitleStyle,
+                    style: AppTheme.titleStyle,
                   ),
                   const SizedBox(height: 4.0),
                   Row(
@@ -146,7 +146,7 @@ class CourseItem extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 14.0,
                             color: AppTheme.secondaryColor,
-                            fontFamily: 'Product Sans'),
+                            fontFamily: 'ProductSans'),
                       ),
                     ],
                   ),

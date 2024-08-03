@@ -23,7 +23,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/home');
               break;
             case 1:
-              Navigator.pushReplacementNamed(context, '/leaderboard');
+              Navigator.pushReplacementNamed(context, '/course');
               break;
             case 2:
               Navigator.pushReplacementNamed(context, '/profile');
@@ -37,8 +37,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: Strings.home,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.leaderboard),
-          label: Strings.leaderboard,
+          icon: Icon(Icons.bookmarks),
+          label: Strings.course,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),

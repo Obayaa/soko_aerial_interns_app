@@ -32,8 +32,8 @@ class AppTheme {
     fontFamily: 'ProductSans'
   );
 
-  static const TextStyle TitleStyle = TextStyle(
-    fontSize: 18,
+  static const TextStyle titleStyle = TextStyle(
+    fontSize: 20,
     fontWeight: FontWeight.bold,
     fontFamily: 'ProductSans'
   );

@@ -9,7 +9,7 @@ class Strings {
   static const String topMentor = 'Top Mentor';
   static const String continueLearning = 'Continue Learning';
   static const String home = 'Home';
-  static const String leaderboard = 'Leaderboard';
+  static const String course = 'Drone Course';
   static const String profile = 'Profile';
 
   // More strings to be added needed

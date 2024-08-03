@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.backgroundColor,
       body: Stack(
         children: [
           // Background image with linear gradient overlay
@@ -65,16 +66,16 @@ class _LoginScreenState extends State<LoginScreen> {
           SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 145),
+                const SizedBox(height: 215),
                 const LogoWithCompanyName(),
                 const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 50.0, horizontal: 20), // Internal padding
+                      vertical: 30.0, horizontal: 20), // Internal padding
                   decoration: const BoxDecoration(
                     color: AppTheme.backgroundColor,
                     borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(40)),
+                        BorderRadius.vertical(top: Radius.circular(40),),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black87,
@@ -96,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 10),
                       CustomTextField(
                         hintText: 'Email',
                         keyboardType: TextInputType.emailAddress,
@@ -114,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           onPressed: () {
-                            // Handle forgot password action
+                            Navigator.pushReplacementNamed(context, '/forgot_password');
                           },
                           child: const Text(
                             'Forgot Password?',
@@ -125,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: () => _login(context),
                         style: ElevatedButton.styleFrom(
@@ -136,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: const Text('Login'),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 5),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 8),
@@ -158,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 5),
                       ElevatedButton.icon(
                         onPressed: () {
                           // Handle Google login action
@@ -184,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               TextSpan(
                                 text: 'Sign Up Here',
                                 style: const TextStyle(
-                                    color: Color.fromARGB(255, 2, 88, 236)),
+                                    color: AppTheme.primaryColor),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.pushReplacementNamed(

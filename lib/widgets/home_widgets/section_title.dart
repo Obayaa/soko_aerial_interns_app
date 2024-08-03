@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 
 class SectionTitle extends StatelessWidget {
   final String title;
@@ -28,7 +29,7 @@ class SectionTitle extends StatelessWidget {
             onPressed: onSeeAll,
             child: const Text(
               'See all',
-              style: TextStyle(color: Color.fromARGB(255, 2, 88, 236)),
+              style: TextStyle(color: AppTheme.primaryColor),
             ),
           ),
         ],

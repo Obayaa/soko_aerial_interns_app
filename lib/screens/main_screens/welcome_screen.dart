@@ -57,63 +57,65 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Background image with linear gradient overlay
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/welcome_bgd.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Container(
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            // Background image with linear gradient overlay
+            Container(
               decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0x30181B5B), Color(0x40181B5B)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+                image: DecorationImage(
+                  image: AssetImage('assets/images/welcome_bgd.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0x30181B5B), Color(0x40181B5B)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
               ),
             ),
-          ),
-          // Content
-          Padding(
-            padding: const EdgeInsets.only(
-                top: 220.0, left: 16, right: 16, bottom: 90),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Spacer(),
-                const LogoWithCompanyName(), 
-                const SizedBox(height: 16),
-                // Welcome text
-                const Text(
-                  'Welcome to Soko Aerial Interns Training App',
-                  style: TextStyle(
-                    fontFamily: 'ProductSans',
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w300,
+            // Content
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 220.0, left: 16, right: 16, bottom: 90),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Spacer(),
+                  const LogoWithCompanyName(), 
+                  const SizedBox(height: 16),
+                  // Welcome text
+                  const Text(
+                    'Welcome to Soko Aerial Interns Training App',
+                    style: TextStyle(
+                      fontFamily: 'ProductSans',
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w300,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 45),
-                // Progress indicator
-                FadeTransition(
-                  opacity: _animation,
-                  child: LinearProgressIndicator(
-                    value:
-                        null,
-                    backgroundColor: Colors.white.withOpacity(0.3),
-                    color: Colors.white,
+                  const SizedBox(height: 45),
+                  // Progress indicator
+                  FadeTransition(
+                    opacity: _animation,
+                    child: LinearProgressIndicator(
+                      value:
+                          null,
+                      backgroundColor: Colors.white.withOpacity(0.3),
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

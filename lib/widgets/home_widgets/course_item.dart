@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 
 class CourseItem extends StatelessWidget {
   final String title;
@@ -48,13 +49,13 @@ class CourseItem extends StatelessWidget {
                   const SizedBox(height: 4.0),
                   Row(
                     children: [
-                      const Icon(Icons.person, size: 20.0, color: Color.fromRGBO(130, 117, 117, 100),),
+                      const Icon(Icons.person, size: 20.0, color: AppTheme.secondaryColor,),
                       const SizedBox(width: 4.0),
                       Text(
                         instructor,
                         style: const TextStyle(
                           fontSize: 14,
-                          color: Color.fromRGBO(130, 117, 117, 100),
+                          color: AppTheme.secondaryColor,
                         ),
                       ),
                     ],

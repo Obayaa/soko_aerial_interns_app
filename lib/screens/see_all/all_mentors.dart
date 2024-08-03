@@ -22,52 +22,66 @@ class AllMentorsScreen extends StatelessWidget {
     Mentor('Ernest Quan', 'Design Engineer', 'assets/images/mentor.jpeg'),
   ];
 
-  AllMentorsScreen({Key? key}) : super(key: key);
+  AllMentorsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.backgroundColor,
+      appBar: AppBar(
+        foregroundColor: Colors.white,
+        title: const Text(
+          'All Mentors',
+          style: AppTheme.sectionTitleStyle,
+        ),
+        centerTitle: true,
+        backgroundColor: AppTheme.primaryColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Container(
-        color: AppTheme.primaryColor,
+        color: AppTheme.backgroundColor,
         child: SafeArea(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    const Text(
-                      'All Mentors',
-                      style: AppTheme.headerTextStyle,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.search, color: Colors.white),
-                      onPressed: () {
-                        // Implement search functionality
-                      },
-                    ),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       IconButton(
+              //         icon: const Icon(Icons.arrow_back, color: Colors.white),
+              //         onPressed: () => Navigator.pop(context),
+              //       ),
+              //       const Text(
+              //         'All Mentors',
+              //         style: AppTheme.headerTextStyle,
+              //       ),
+              //       IconButton(
+              //         icon: const Icon(Icons.search, color: Colors.white),
+              //         onPressed: () {
+              //           // Implement search functionality
+              //         },
+              //       ),
+              //     ],
+              //   ),
+              // ),
               Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-                  ),
-                  child: ListView.builder(
-                    padding: const EdgeInsets.only(top: 20),
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: mentors.length,
-                    itemBuilder: (context, index) {
-                      return MentorListItem(mentor: mentors[index]);
-                    },
-                  ),
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(top: 20),
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: mentors.length,
+                  itemBuilder: (context, index) {
+                    return MentorListItem(mentor: mentors[index]);
+                  },
                 ),
               ),
             ],
@@ -89,7 +103,7 @@ class Mentor {
 class MentorListItem extends StatelessWidget {
   final Mentor mentor;
 
-  const MentorListItem({Key? key, required this.mentor}) : super(key: key);
+  const MentorListItem({super.key, required this.mentor});
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +122,7 @@ class MentorListItem extends StatelessWidget {
               children: [
                 Text(
                   mentor.name,
-                  style: AppTheme.TitleStyle,
+                  style: AppTheme.titleStyle,
                 ),
                 Text(
                   mentor.role,
