@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 200.0, // Adjust the height as needed
+            height: 200.0, 
             decoration: const BoxDecoration(
               color: AppTheme.primaryColor,
               borderRadius: BorderRadius.only(
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
-              physics: const ClampingScrollPhysics(), // Removes bouncy effect
+              physics: const ClampingScrollPhysics(), 
               children: const [
                 SizedBox(height: 16.0),
                 CategorySection(),

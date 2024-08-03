@@ -55,7 +55,7 @@ class MentorCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: 35, // Adjusted radius
+            radius: 35, 
             backgroundImage: AssetImage(mentor.imageUrl),
           ),
           const SizedBox(height: 8),
