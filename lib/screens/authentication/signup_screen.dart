@@ -34,6 +34,7 @@ class _SignupScreenState extends State<SignupScreen> {
       User? user = await widget.userRepository.signUp(
         emailController.text,
         passwordController.text,
+        usernameController.text,
       );
       if (user != null) {
         if (!mounted) return;
@@ -74,12 +75,12 @@ class _SignupScreenState extends State<SignupScreen> {
           SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 115),
+                const SizedBox(height: 155),
                 const LogoWithCompanyName(),
                 const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 35.0, horizontal: 20), // Internal padding
+                      vertical: 45.0, horizontal: 20), // Internal padding
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius:
@@ -148,42 +149,42 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         child: const Text('Sign Up'),
                       ),
-                      const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                                child:
-                                    Container(color: Colors.black, height: 1)),
-                            const SizedBox(width: 8),
-                            const Text(
-                              'Or sign up with',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                                child:
-                                    Container(color: Colors.black, height: 1)),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          // Handle Google signup action
-                        },
-                        icon: const Icon(Icons.login),
-                        label: const Text('Google'),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white,
-                          textStyle: const TextStyle(fontSize: 18),
-                        ),
-                      ),
+                      // const SizedBox(height: 10),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       horizontal: 20.0, vertical: 8),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: [
+                      //       Expanded(
+                      //           child:
+                      //               Container(color: Colors.black, height: 1)),
+                      //       const SizedBox(width: 8),
+                      //       const Text(
+                      //         'Or sign up with',
+                      //         style: TextStyle(color: Colors.black),
+                      //       ),
+                      //       const SizedBox(width: 8),
+                      //       Expanded(
+                      //           child:
+                      //               Container(color: Colors.black, height: 1)),
+                      //     ],
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 8),
+                      // ElevatedButton.icon(
+                      //   onPressed: () {
+                      //     // Handle Google signup action
+                      //   },
+                      //   icon: const Icon(Icons.login),
+                      //   label: const Text('Google'),
+                      //   style: ElevatedButton.styleFrom(
+                      //     minimumSize: const Size(double.infinity, 50),
+                      //     backgroundColor: Colors.black,
+                      //     foregroundColor: Colors.white,
+                      //     textStyle: const TextStyle(fontSize: 18),
+                      //   ),
+                      // ),
                       const SizedBox(height: 20),
                       Center(
                         child: RichText(
@@ -207,6 +208,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 45),
                     ],
                   ),
                 ),

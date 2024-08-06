@@ -72,3 +72,25 @@ dependencies {
     // Add other Firebase dependencies as needed
     implementation("com.google.firebase:firebase-auth")
 }
+
+task printDebugKeyHash {
+    doLast {
+        def keystorePropertiesFile = rootProject.file("key.properties")
+        def debugKeystore = "${System.properties['user.home']}/.android/debug.keystore"
+        
+        if (keystorePropertiesFile.exists()) {
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            debugKeystore = keystoreProperties['storeFile']
+        }
+        
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'keytool', '-list', '-v', '-keystore', debugKeystore, '-alias', 'androiddebugkey', '-storepass', 'android', '-keypass', 'android'
+            standardOutput = stdout
+        }
+        def stringOutput = stdout.toString()
+        def sha1 = (stringOutput =~ /SHA1: (.+)/)[0][1]
+        println "SHA1: $sha1"
+    }
+}

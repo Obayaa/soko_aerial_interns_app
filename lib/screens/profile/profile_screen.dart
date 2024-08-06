@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 import 'package:soko_aerial_interns_app/widgets/reusable_widgets/custom_bottom_navigation_bar.dart';
+import '../../data/repositories/user_repository.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final UserRepository userRepository;
+
+  const ProfileScreen({super.key, required this.userRepository});
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -13,6 +17,24 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isDarkModeEnabled = false;
   bool areNotificationsEnabled = false;
+  String userName = 'Jane Doe';
+  String userEmail = 'janedoe23@email.com';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserDetails();
+  }
+
+  Future<void> _loadUserDetails() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      setState(() {
+        userName = user.displayName ?? 'User';
+        userEmail = user.email ?? 'user@example.com';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pushNamed(context, '/home'),
         ),
         title: const Text('Profile', style: AppTheme.headerTextStyle),
         centerTitle: true,
@@ -64,8 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(
-          currentIndex: 2), // Assuming 2 is for Profile
+      bottomNavigationBar: const CustomBottomNavigationBar(currentIndex: 2), // where 2 is for Profile
     );
   }
 
@@ -98,14 +119,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
           const SizedBox(height: 10),
-          const Text(
-            'Jane Doe',
-            style: TextStyle(
+          Text(
+            userName,
+            style: const TextStyle(
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 5),
-          const Text(
-            'janedoe23@email.com',
+          Text(
+            userEmail,
             style: AppTheme.subHeaderTextStyle,
           ),
           const SizedBox(height: 5),
@@ -143,8 +164,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildTextItem(String title) {
-    return GestureDetector(child: Text(title, style: AppTheme.titleStyle),
-    onTap: (){},
+    return GestureDetector(
+      child: Text(title, style: AppTheme.titleStyle),
+      onTap: () {},
     );
   }
 
@@ -164,7 +186,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildLogoutButton() {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        await FirebaseAuth.instance.signOut();
         Navigator.pushReplacementNamed(context, '/login');
       },
       child: const Text(

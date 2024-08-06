@@ -45,6 +45,8 @@ dependencies:
   gestures: ^1.0.0
   http: ^1.2.2
   connectivity: ^3.0.6
+  google_sign_in: ^6.2.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:

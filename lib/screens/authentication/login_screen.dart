@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:soko_aerial_interns_app/data/repositories/user_repository.dart';
+import 'package:soko_aerial_interns_app/blocs/authentication/authentication_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 import '../../widgets/reusable_widgets/custom_text_field.dart';
@@ -26,16 +28,19 @@ class _LoginScreenState extends State<LoginScreen> {
         passwordController.text,
       );
       if (user != null) {
-        if (!mounted) return;
-        Navigator.pushReplacementNamed(context, '/home');
+        context.read<AuthenticationBloc>().add(LoggedIn(user));
+        Navigator.pushReplacementNamed(context, '/home', arguments: user);
       }
     } catch (e) {
-      // Handle login error
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Login failed: $e')),
       );
     }
+  }
+
+  void _loginWithGoogle() {
+    context.read<AuthenticationBloc>().add(GoogleSignInRequested(context));
   }
 
   @override
@@ -44,7 +49,6 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: AppTheme.backgroundColor,
       body: Stack(
         children: [
-          // Background image with linear gradient overlay
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -62,7 +66,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          // Content
           SingleChildScrollView(
             child: Column(
               children: [
@@ -71,11 +74,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 30.0, horizontal: 20), // Internal padding
+                      vertical: 30.0, horizontal: 20),
                   decoration: const BoxDecoration(
                     color: AppTheme.backgroundColor,
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(40),),
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black87,
@@ -110,7 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: passwordController,
                       ),
                       const SizedBox(height: 8),
-                      // Forgot Password button
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
@@ -120,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text(
                             'Forgot Password?',
                             style: TextStyle(
-                              color: AppTheme.primaryColor, // Color for the text
+                              color: AppTheme.primaryColor,
                               fontSize: 16,
                             ),
                           ),
@@ -144,26 +145,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
-                                child:
-                                    Container(color: Colors.black, height: 1)),
+                            Expanded(child: Container(color: Colors.black, height: 1)),
                             const SizedBox(width: 8),
                             const Text(
                               'Or login with',
                               style: TextStyle(color: Colors.black),
                             ),
                             const SizedBox(width: 8),
-                            Expanded(
-                                child:
-                                    Container(color: Colors.black, height: 1)),
+                            Expanded(child: Container(color: Colors.black, height: 1)),
                           ],
                         ),
                       ),
                       const SizedBox(height: 5),
                       ElevatedButton.icon(
-                        onPressed: () {
-                          // Handle Google login action
-                        },
+                        onPressed: _loginWithGoogle,
                         icon: const Icon(Icons.login),
                         label: const Text('Google'),
                         style: ElevatedButton.styleFrom(
@@ -184,12 +179,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               TextSpan(
                                 text: 'Sign Up Here',
-                                style: const TextStyle(
-                                    color: AppTheme.primaryColor),
+                                style: const TextStyle(color: AppTheme.primaryColor),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushReplacementNamed(
-                                        context, '/signup');
+                                    Navigator.pushReplacementNamed(context, '/signup');
                                   },
                               ),
                             ],

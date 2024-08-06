@@ -3,22 +3,31 @@ import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 
 class AllMentorsScreen extends StatelessWidget {
   final List<Mentor> mentors = [
-    Mentor('Hubert Amponsah', 'Python Application Developer', 'assets/images/mentor.jpeg'),
-    Mentor('Mark Amoakohene', 'Web Application Developer', 'assets/images/mentor.jpeg'),
+    Mentor('Hubert Amponsah', 'Python Application Developer',
+        'assets/images/mentor.jpeg'),
+    Mentor('Mark Amoakohene', 'Web Application Developer',
+        'assets/images/mentor.jpeg'),
     Mentor('Sampson Adu-Gyamfi', 'UI/UX Designer', 'assets/images/mentor.jpeg'),
-    Mentor('Bernard Amoateng', 'Arduino Programming Dev...', 'assets/images/mentor.jpeg'),
+    Mentor('Bernard Amoateng', 'Arduino Programming Dev...',
+        'assets/images/mentor.jpeg'),
     Mentor('Bright Opoku', 'Mobile App Developer', 'assets/images/mentor.jpeg'),
-    Mentor('Edmond Ayitey', 'Python App Developer', 'assets/images/mentor.jpeg'),
-    Mentor('Martin Mawusi', 'Autonomous Flight D...', 'assets/images/mentor.jpeg'),
+    Mentor(
+        'Edmond Ayitey', 'Python App Developer', 'assets/images/mentor.jpeg'),
+    Mentor(
+        'Martin Mawusi', 'Autonomous Flight D...', 'assets/images/mentor.jpeg'),
     Mentor('Godfrey Hudson', 'Drone Engineer', 'assets/images/mentor.jpeg'),
-    Mentor('Confidence Gawu', 'Site Mapping Instructor', 'assets/images/mentor.jpeg'),
+    Mentor('Confidence Gawu', 'Site Mapping Instructor',
+        'assets/images/mentor.jpeg'),
     Mentor('Eric Amenyo', 'Drone Basic Trainer', 'assets/images/mentor.jpeg'),
     Mentor('Edem Mawuena', 'Drone Engineer', 'assets/images/mentor.jpeg'),
-    Mentor('Benedicta Ayetey', 'Drone pilot/Map instr...', 'assets/images/mentor.jpeg'),
-    Mentor('George Ntori', 'Python Application Dev...', 'assets/images/mentor.jpeg'),
+    Mentor('Benedicta Ayetey', 'Drone pilot/Map instr...',
+        'assets/images/mentor.jpeg'),
+    Mentor('George Ntori', 'Python Application Dev...',
+        'assets/images/mentor.jpeg'),
     Mentor('Jedidiah K. Tetteh', 'Drone Expert', 'assets/images/mentor.jpeg'),
-    Mentor('Ernest Keteku', 'Geographic Site map...', 'assets/images/mentor.jpeg'),
-    Mentor('wences whyne', '3D Designer', 'assets/images/mentor.jpeg'),
+    Mentor(
+        'Ernest Keteku', 'Geographic Site map...', 'assets/images/mentor.jpeg'),
+    Mentor('Wences Whyne', '3D Designer', 'assets/images/mentor.jpeg'),
     Mentor('Ernest Quan', 'Design Engineer', 'assets/images/mentor.jpeg'),
   ];
 
@@ -52,36 +61,19 @@ class AllMentorsScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       IconButton(
-              //         icon: const Icon(Icons.arrow_back, color: Colors.white),
-              //         onPressed: () => Navigator.pop(context),
-              //       ),
-              //       const Text(
-              //         'All Mentors',
-              //         style: AppTheme.headerTextStyle,
-              //       ),
-              //       IconButton(
-              //         icon: const Icon(Icons.search, color: Colors.white),
-              //         onPressed: () {
-              //           // Implement search functionality
-              //         },
-              //       ),
-              //     ],
-              //   ),
-              // ),
               Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(top: 20),
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: mentors.length,
-                  itemBuilder: (context, index) {
-                    return MentorListItem(mentor: mentors[index]);
-                  },
+                child: Scrollbar(
+                  thumbVisibility: true,
+                  thickness: 6,
+                  radius: const Radius.circular(10),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.only(top: 20),
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: mentors.length,
+                    itemBuilder: (context, index) {
+                      return MentorListItem(mentor: mentors[index]);
+                    },
+                  ),
                 ),
               ),
             ],
@@ -122,11 +114,12 @@ class MentorListItem extends StatelessWidget {
               children: [
                 Text(
                   mentor.name,
-                  style: AppTheme.titleStyle,
+                  style: AppTheme.mentorTitleStyle,
                 ),
                 Text(
                   mentor.role,
-                  style: const TextStyle(color: AppTheme.secondaryColor, fontSize: 16),
+                  style: const TextStyle(
+                      color: AppTheme.secondaryColor, fontSize: 16),
                 ),
               ],
             ),

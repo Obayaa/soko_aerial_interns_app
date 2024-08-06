@@ -20,11 +20,12 @@ class AppTheme {
     fontFamily: 'ProductSans'
   );
 
-  // static const TextStyle mentorTitleStyle = TextStyle(
-  //   fontSize: 20,
-  //   color: Colors.white,
-  //   fontFamily: 'ProductSans'
-  // );
+  static const TextStyle mentorTitleStyle = TextStyle(
+    fontSize: 18,
+    // color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'ProductSans'
+  );
 
   static const TextStyle sectionTitleStyle = TextStyle(
     fontSize: 22,

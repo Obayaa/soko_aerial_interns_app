@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../data/repositories/user_repository.dart';
 import '../../widgets/home_widgets/category_section.dart';
 import '../../widgets/home_widgets/continue_learning_section.dart';
 import '../../widgets/home_widgets/course_section.dart';
@@ -7,8 +9,33 @@ import '../../widgets/reusable_widgets/custom_bottom_navigation_bar.dart';
 import '../../utils/app_theme.dart';
 import '../../utils/strings.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+    final UserRepository userRepository;
+
+  const HomeScreen({super.key, required this.userRepository});
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late String? _username = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
+
+  Future<void> _loadUserName() async {
+    if (widget.userRepository.currentUser != null) {
+      String? username = await widget.userRepository
+          .getUsername(widget.userRepository.currentUser!.uid);
+      setState(() {
+        _username = username;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +45,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 200.0, 
+            height: 200.0,
             decoration: const BoxDecoration(
               color: AppTheme.primaryColor,
               borderRadius: BorderRadius.only(
@@ -31,23 +58,23 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            Strings.greeting,
+                            _username != null ? 'Welcome, $_username 👋!' : 'Welcome 👋!',
                             style: AppTheme.headerTextStyle,
                           ),
-                          Text(
+                          const Text(
                             Strings.learningPrompt,
                             style: AppTheme.subHeaderTextStyle,
                           ),
                         ],
                       ),
-                      Icon(
+                      const Icon(
                         Icons.notifications,
                         color: Colors.white,
                       ),
@@ -75,7 +102,7 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
-              physics: const ClampingScrollPhysics(), 
+              physics: const ClampingScrollPhysics(),
               children: const [
                 SizedBox(height: 16.0),
                 CategorySection(),
