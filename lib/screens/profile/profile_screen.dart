@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:soko_aerial_interns_app/utils/app_theme.dart';
 import 'package:soko_aerial_interns_app/widgets/reusable_widgets/custom_bottom_navigation_bar.dart';
 import '../../data/repositories/user_repository.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   final UserRepository userRepository;
@@ -166,8 +168,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildTextItem(String title) {
     return GestureDetector(
       child: Text(title, style: AppTheme.titleStyle),
-      onTap: () {},
+      onTap: () {
+        _launchURL('https://www.sokoaerial.com');
+      },
     );
+  }
+    void _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   Widget _buildSwitchItem(String title, bool value, Function(bool) onChanged) {

@@ -102,7 +102,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Future<void> _onGoogleSignInRequested(GoogleSignInRequested event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoading());
     try {
-      final User? user = await userRepository.signInWithGoogle();
+      final User? user = await userRepository.signInWithGoogle(event.context);
       if (user != null) {
         emit(Authenticated(user));
         Navigator.pushReplacementNamed(event.context, '/home', arguments: user);

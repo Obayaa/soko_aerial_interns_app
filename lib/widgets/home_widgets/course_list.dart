@@ -18,7 +18,7 @@ class CourseList extends StatelessWidget {
           instructor: 'Mark Joe',
           imageUrl: 'assets/images/web.jpg',
           onTap: () {
-            Navigator.pushNamed(context, '/course/web_dev');
+            Navigator.pushNamed(context, '/web_dev_screen');
           },
         ),
         CourseItem(

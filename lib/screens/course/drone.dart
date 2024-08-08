@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DroneEngineeringScreen extends StatelessWidget {
-  const DroneEngineeringScreen({super.key});
+class DroneScreen extends StatelessWidget {
+  const DroneScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class DroneEngineeringScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          title: const Text('Drone Engineering'),
+          title: const Text('Drone Course'),
       ),
       body: const Center(child: Text("Still in progress"),),
     );

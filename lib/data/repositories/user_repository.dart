@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:soko_aerial_interns_app/services/auth_service.dart';
+import 'package:flutter/material.dart';
+import '../../services/auth_service.dart';
 
 class UserRepository {
   final FirebaseAuth _firebaseAuth;
@@ -11,8 +12,7 @@ class UserRepository {
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _authService = authService;
 
-  Future<User?> signInWithCredentials(
-      String email, String password) async {
+  Future<User?> signInWithCredentials(String email, String password, BuildContext context) async {
     print('Attempting to sign in with email: $email');
     try {
       UserCredential userCredential =
@@ -22,17 +22,27 @@ class UserRepository {
       );
       print('Sign in successful for user: ${userCredential.user?.uid}');
       return userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      print('Sign in failed with error: $e');
+      _showErrorDialog(context, 'Sign in failed', e.message ?? 'An unknown error occurred.');
+      rethrow;
     } catch (e) {
       print('Sign in failed with error: $e');
+      _showErrorDialog(context, 'Sign in failed', e.toString());
       rethrow;
     }
   }
 
-  Future<User?> signInWithGoogle() async {
-    return _authService.signInWithGoogle();
+  Future<User?> signInWithGoogle(BuildContext context) async {
+    try {
+      return _authService.signInWithGoogle();
+    } catch (e) {
+      _showErrorDialog(context, 'Google Sign-In failed', e.toString());
+      rethrow;
+    }
   }
 
-  Future<void> signOut() async {
+   Future<void> signOut() async {
     await Future.wait(
       [
         _firebaseAuth.signOut(),
@@ -41,7 +51,7 @@ class UserRepository {
     );
   }
 
-  Future<User?> signUp(String email, String username, String password) async {
+  Future<User?> signUp(String email, String username, String password, BuildContext context) async {
     try {
       UserCredential userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
@@ -60,13 +70,15 @@ class UserRepository {
 
       return user;
     } on FirebaseAuthException catch (e) {
+      _showErrorDialog(context, 'Sign up failed', _mapFirebaseAuthException(e));
       throw _mapFirebaseAuthException(e);
     } catch (e) {
+      _showErrorDialog(context, 'An unexpected error occurred', e.toString());
       throw Exception('An unexpected error occurred: $e');
     }
   }
 
-  Future<String?> getUsername(String uid) async {
+  Future<String?> getUsername(String uid, BuildContext context) async {
     try {
       DocumentSnapshot doc = await _firestore.collection('users').doc(uid).get();
       if (doc.exists) {
@@ -74,9 +86,31 @@ class UserRepository {
       }
       return null;
     } catch (e) {
+      _showErrorDialog(context, 'Error fetching username', e.toString());
       print('Error fetching username: $e');
       return null;
     }
+  }
+
+  void _showErrorDialog(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              // ignore: prefer_const_constructors
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   String _mapFirebaseAuthException(FirebaseAuthException e) {

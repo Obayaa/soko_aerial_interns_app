@@ -10,8 +10,8 @@ class LogoWithCompanyName extends StatelessWidget {
     super.key,
     this.logoHeight = 100,
     this.spacing = 1,
-    this.companyNameFontSize = 30,
-    this.logoToCompanyNameSpacing = 16,
+    this.companyNameFontSize = 26,
+    this.logoToCompanyNameSpacing = 13,
   });
 
   @override

@@ -26,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
       User? user = await widget.userRepository.signInWithCredentials(
         emailController.text,
         passwordController.text,
+        context, // pass context here
       );
       if (user != null) {
         context.read<AuthenticationBloc>().add(LoggedIn(user));
@@ -33,8 +34,20 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login failed: $e')),
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Login failed'),
+            content: Text(e.toString()),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
       );
     }
   }
@@ -45,157 +58,162 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/welcome_bgd.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Container(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: AppTheme.backgroundColor,
+        body: Stack(
+          children: [
+            Container(
               decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0x70000000), Color(0x70181B5B)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+                image: DecorationImage(
+                  image: AssetImage('assets/images/welcome_bgd.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0x70000000), Color(0x70181B5B)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
               ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 215),
-                const LogoWithCompanyName(),
-                const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 30.0, horizontal: 20),
-                  decoration: const BoxDecoration(
-                    color: AppTheme.backgroundColor,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black87,
-                        blurRadius: 10,
-                        offset: Offset(0, -5),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Text(
-                        "Login",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                          fontFamily: 'ProductSans',
-                          fontWeight: FontWeight.bold,
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 190),
+                  const LogoWithCompanyName(),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 20),
+                    decoration: const BoxDecoration(
+                      color: AppTheme.backgroundColor,
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black87,
+                          blurRadius: 10,
+                          offset: Offset(0, -5),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        hintText: 'Email',
-                        keyboardType: TextInputType.emailAddress,
-                        controller: emailController,
-                      ),
-                      const SizedBox(height: 6),
-                      CustomTextField(
-                        hintText: 'Password',
-                        obscureText: true,
-                        controller: passwordController,
-                      ),
-                      const SizedBox(height: 8),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/forgot_password');
-                          },
-                          child: const Text(
-                            'Forgot Password?',
-                            style: TextStyle(
-                              color: AppTheme.primaryColor,
-                              fontSize: 16,
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Text(
+                          "Login",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontFamily: 'ProductSans',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          hintText: 'Email',
+                          keyboardType: TextInputType.emailAddress,
+                          controller: emailController,
+                        ),
+                        const SizedBox(height: 6),
+                        CustomTextField(
+                          hintText: 'Password',
+                          obscureText: true,
+                          controller: passwordController,
+                        ),
+                        const SizedBox(height: 5),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(context, '/forgot_password');
+                            },
+                            child: const Text(
+                              'Forgot Password?',
+                              style: TextStyle(
+                                color: AppTheme.primaryColor,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () => _login(context),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white,
-                          textStyle: const TextStyle(fontSize: 18),
+                        const SizedBox(height: 5),
+                        ElevatedButton(
+                          onPressed: () => _login(context),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(double.infinity, 50),
+                            backgroundColor: Colors.black,
+                            foregroundColor: Colors.white,
+                            textStyle: const TextStyle(fontSize: 18),
+                          ),
+                          child: const Text('Login'),
                         ),
-                        child: const Text('Login'),
-                      ),
-                      const SizedBox(height: 5),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(child: Container(color: Colors.black, height: 1)),
-                            const SizedBox(width: 8),
-                            const Text(
-                              'Or login with',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(child: Container(color: Colors.black, height: 1)),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      ElevatedButton.icon(
-                        onPressed: _loginWithGoogle,
-                        icon: const Icon(Icons.login),
-                        label: const Text('Google'),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white,
-                          textStyle: const TextStyle(fontSize: 18),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: RichText(
-                          text: TextSpan(
+                        const SizedBox(height: 5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const TextSpan(
-                                text: 'Don\'t have an account? ',
+                              Expanded(child: Container(color: Colors.black, height: 1)),
+                              const SizedBox(width: 8),
+                              const Text(
+                                'Or login with',
                                 style: TextStyle(color: Colors.black),
                               ),
-                              TextSpan(
-                                text: 'Sign Up Here',
-                                style: const TextStyle(color: AppTheme.primaryColor),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushReplacementNamed(context, '/signup');
-                                  },
-                              ),
+                              const SizedBox(width: 8),
+                              Expanded(child: Container(color: Colors.black, height: 1)),
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 5),
+                        ElevatedButton.icon(
+                          onPressed: _loginWithGoogle,
+                          icon: const Icon(Icons.login),
+                          label: const Text('Google'),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(double.infinity, 50),
+                            backgroundColor: Colors.black,
+                            foregroundColor: Colors.white,
+                            textStyle: const TextStyle(fontSize: 18),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Center(
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: 'Don\'t have an account? ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: 'Sign Up Here',
+                                  style: const TextStyle(color: AppTheme.primaryColor),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.pushReplacementNamed(context, '/signup');
+                                    },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

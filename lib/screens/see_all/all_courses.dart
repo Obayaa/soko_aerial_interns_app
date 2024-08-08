@@ -36,7 +36,7 @@ class AllCoursesScreen extends StatelessWidget {
             title: 'Web Development',
             instructor: 'Mark Joe',
             imageUrl: 'assets/images/web.jpg',
-            onTap: () => Navigator.pushNamed(context, '/web_dev'),
+            onTap: () => Navigator.pushNamed(context, '/web_dev_screen'),
           ),
           CourseItem(
             title: 'UI/UX Design',

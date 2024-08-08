@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../../data/repositories/user_repository.dart';
 import '../../widgets/home_widgets/category_section.dart';
 import '../../widgets/home_widgets/continue_learning_section.dart';
@@ -10,7 +9,7 @@ import '../../utils/app_theme.dart';
 import '../../utils/strings.dart';
 
 class HomeScreen extends StatefulWidget {
-    final UserRepository userRepository;
+  final UserRepository userRepository;
 
   const HomeScreen({super.key, required this.userRepository});
 
@@ -24,18 +23,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _loadUserName();
+    // _loadUserName();
   }
 
-  Future<void> _loadUserName() async {
-    if (widget.userRepository.currentUser != null) {
-      String? username = await widget.userRepository
-          .getUsername(widget.userRepository.currentUser!.uid);
-      setState(() {
-        _username = username;
-      });
-    }
-  }
+  // Future<void> _loadUserName() async {
+  //   if (widget.userRepository.currentUser != null) {
+  //     String? username = await widget.userRepository.getUsername(
+  //       widget.userRepository.currentUser!.uid,
+  //       context,
+  //     );
+  //     setState(() {
+  //       _username = username;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _username != null ? 'Welcome, $_username 👋!' : 'Welcome 👋!',
+                            _username != null
+                                ? 'Welcome, $_username 👋!'
+                                : 'Welcome 👋!',
                             style: AppTheme.headerTextStyle,
                           ),
                           const Text(
