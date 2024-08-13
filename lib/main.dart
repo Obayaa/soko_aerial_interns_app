@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:soko_aerial_interns_app/firebase_options.dart';
 import 'package:soko_aerial_interns_app/screens/authentication/forgot_password.dart';
 import 'package:soko_aerial_interns_app/screens/course/desktop.dart';
 import 'package:soko_aerial_interns_app/screens/course/drone.dart';
@@ -25,7 +26,9 @@ import 'screens/course/mapping.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(
     MultiRepositoryProvider(
