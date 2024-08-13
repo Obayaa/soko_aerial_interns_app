@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:114714721078:android:36994273aba3dcc7fc5197",
+        "mobilesdk_app_id": "1:114714721078:android:374e18e1e0c6b180fc5197",
         "android_client_info": {
-          "package_name": "com.example.soko_aerial_interns_app"
+          "package_name": "com.example.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "114714721078-803eaul6td9lvfo01p30l1kqbac5cph3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD4ZJPrtlEkW2L9ilxxRxCMhYKZSTTGMC4"
@@ -20,7 +25,49 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114714721078-803eaul6td9lvfo01p30l1kqbac5cph3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114714721078:android:36994273aba3dcc7fc5197",
+        "android_client_info": {
+          "package_name": "com.example.soko_aerial_interns_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114714721078-ktursk8uiqoieer93fik6dv7qv27rif9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.soko_aerial_interns_app",
+            "certificate_hash": "53e85a6d7888cb2ba67e9ee557c3bf0196064242"
+          }
+        },
+        {
+          "client_id": "114714721078-803eaul6td9lvfo01p30l1kqbac5cph3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4ZJPrtlEkW2L9ilxxRxCMhYKZSTTGMC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114714721078-803eaul6td9lvfo01p30l1kqbac5cph3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

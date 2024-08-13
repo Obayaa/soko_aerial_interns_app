@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>114714721078-dcco0pv45u7vtihbka2ugfnpih8pjreg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.114714721078-dcco0pv45u7vtihbka2ugfnpih8pjreg</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>114714721078-ktursk8uiqoieer93fik6dv7qv27rif9.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBsW5RRnxmgt5zPIE9boAG-3sE4LKEKM5o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>114714721078</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.sokoAerialInternsApp</string>
+	<key>PROJECT_ID</key>
+	<string>soko-aerial-interns-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>soko-aerial-interns-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:114714721078:ios:c96ea5fac2a1e25cfc5197</string>
+</dict>
+</plist>
