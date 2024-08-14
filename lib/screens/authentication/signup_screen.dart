@@ -19,7 +19,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool _isAgreed = false; // Checkbox state
+  final bool _isAgreed = false; // Checkbox state
 
   Future<void> _signup(BuildContext context) async {
     if (!_isAgreed) {
@@ -30,7 +30,8 @@ class _SignupScreenState extends State<SignupScreen> {
       return;
     }
 
-    print('Attempting to sign up with email: ${emailController.text}, password: ${passwordController.text}, username: ${usernameController.text}');
+    print(
+        'Attempting to sign up with email: ${emailController.text}, password: ${passwordController.text}, username: ${usernameController.text}');
 
     try {
       User? user = await widget.userRepository.signUp(
@@ -71,7 +72,11 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0x70000000), Color(0x70181B5B)],
+                    colors: [
+                      Color(0x70000000),
+                      Color(0x70181B5B),
+                      Colors.white
+                    ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -79,112 +84,144 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             // Content
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 135),
-                  const LogoWithCompanyName(),
-                  const SizedBox(height: 16),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 25.0, horizontal: 20), // Internal padding
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(40)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black87,
-                          blurRadius: 10,
-                          offset: Offset(0, -5),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const Text(
-                          "Sign Up",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25,
-                            fontFamily: 'ProductSans',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        CustomTextField(
-                          hintText: 'Username',
-                          keyboardType: TextInputType.text,
-                          controller: usernameController,
-                        ),
-                        const SizedBox(height: 10),
-                        CustomTextField(
-                          hintText: 'Email',
-                          keyboardType: TextInputType.emailAddress,
-                          controller: emailController,
-                        ),
-                        const SizedBox(height: 10),
-                        CustomTextField(
-                          hintText: 'Password',
-                          obscureText: true,
-                          controller: passwordController,
-                        ),
-                        const SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: _isAgreed,
-                              onChanged: (bool? newValue) {
-                                setState(() {
-                                  _isAgreed = newValue ?? false;
-                                });
-                              },
-                            ),
-                            const Text('I agree to the terms and conditions'),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        ElevatedButton(
-                          onPressed: () => _signup(context),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(double.infinity, 50),
-                            backgroundColor: Colors.black,
-                            foregroundColor: Colors.white,
-                            textStyle: const TextStyle(fontSize: 18),
-                          ),
-                          child: const Text('Sign Up'),
-                        ),
-                        const SizedBox(height: 20),
-                        Center(
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                const TextSpan(
-                                  text: 'Already have an account? ',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                TextSpan(
-                                  text: 'Login Here',
-                                  style: const TextStyle(
-                                      color: AppTheme.primaryColor),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.pushReplacementNamed(
-                                          context, '/login');
-                                    },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 45),
-                      ],
-                    ),
-                  ),
-                ],
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: SafeArea(
+                bottom: false,
+                child: Column(
+                  children: [
+                    const LogoWithCompanyName(),
+                    const SizedBox(height: 16),
+                    signupContainer(context),
+                  ],
+                ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container signupContainer(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 25.0,
+        horizontal: 20,
+      ), // Internal padding
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black87,
+            blurRadius: 10,
+            offset: Offset(0, -5),
+          ),
+        ],
+      ),
+      child: ContainerContent(usernameController: usernameController, passwordController: passwordController, emailController: emailController, isAgreed: _isAgreed, onPressed: ()=>_signup(context),),
+    );
+  }
+}
+
+//contentContainer
+class ContainerContent extends StatelessWidget {
+  const ContainerContent({super.key, required this.isAgreed, required this.usernameController, required this.emailController, required this.passwordController, this.onChanged, required this.onPressed,});
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
+  final TextEditingController emailController;
+  final bool isAgreed;
+ final  void Function(bool? isAgreed)? onChanged;
+ final VoidCallback onPressed;  
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text(
+            "Sign Up",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+              fontFamily: 'ProductSans',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          CustomTextField(
+            hintText: 'Username',
+            keyboardType: TextInputType.text,
+            controller: usernameController,
+          ),
+          const SizedBox(height: 10),
+          CustomTextField(
+            hintText: 'Email',
+            keyboardType: TextInputType.emailAddress,
+            controller: emailController,
+          ),
+          const SizedBox(height: 10),
+          CustomTextField(
+            hintText: 'Password',
+            obscureText: true,
+            controller: passwordController,
+          ),
+          const SizedBox(height: 5),
+          Row(
+            children: [
+              Checkbox(
+                value: isAgreed,
+                onChanged: onChanged,
+              ),
+              const Text('I agree to the terms and conditions'),
+            ],
+          ),
+          const SizedBox(height: 5),
+          ElevatedButton(
+            onPressed: () => onPressed ,
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(double.infinity, 50),
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
+              textStyle: const TextStyle(fontSize: 18),
+            ),
+            child: const Text('Sign Up'),
+          ),
+          const SizedBox(height: 20),
+          const AlternativeLogin(),
+          const SizedBox(height: 45),
+        ],
+      );
+  }
+}
+
+//alternative loginBtn
+class AlternativeLogin extends StatelessWidget {
+  const AlternativeLogin({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: RichText(
+        text: TextSpan(
+          children: [
+            const TextSpan(
+              text: 'Already have an account? ',
+              style: TextStyle(color: Colors.black),
+            ),
+            TextSpan(
+              text: 'Login Here',
+              style: const TextStyle(color: AppTheme.primaryColor),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.pushReplacementNamed(context, '/login');
+                },
             ),
           ],
         ),
